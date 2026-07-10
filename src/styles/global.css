@@ -20,8 +20,7 @@ body {
 	font-family: var(--font-atkinson);
 	margin: 0;
 	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
+	background: #F8B71D;
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
@@ -43,10 +42,15 @@ h5,
 h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
-	line-height: 1.2;
+	line-height: 1;
 }
 h1 {
-	font-size: 3.052em;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	font-size: 14rem;
+	color: #D61A1F;
+	text-shadow:
+    -1px -1px 1px rgba(0, 0, 0, 0.3),   
+     1px  1px 1px rgba(0, 0, 0, 0.8); 	
 }
 h2 {
 	font-size: 2.441em;
@@ -72,6 +76,8 @@ a:hover {
 }
 p {
 	margin-bottom: 1em;
+	
+
 }
 .prose p {
 	margin-bottom: 2em;
@@ -83,13 +89,12 @@ textarea {
 input {
 	font-size: 16px;
 }
-table {
-	width: 100%;
-}
-img {
+ul li img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
+}
+table {
+	width: 100%;
 }
 code {
 	padding: 2px 5px;
