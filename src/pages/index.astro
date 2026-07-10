@@ -11,17 +11,22 @@ import heroImage from '../assets/Dyl-inForest-sun.jpg';
 
 const faqItems = [
   {
-    question: "What’s your design philosophy?",
-    answer: "I believe design should be both functional and emotionally resonant. Every pixel has a purpose, and every interaction should feel natural."
+    question: "What inspires you?",
+    answer: "I am always inspired by work created by hand. Old advertisements, album covers, film, and tv that require real observation. Work was done painstakingly by hand back then and I really admire that level of detail. I draw direct inspiration of the aesthetic choices of film directors like Stanley Kubrick, Brian De Palma, Akira Kurosawa, and Spike Lee. Also a big fan of the iconic Blue Note album covers done by Francis Wolff & Reid Miles. "
+  },
+    {
+    question: "What is your development stack?",
+    answer: "It depends on the scope of the project! This portfolio site was built with Astro, which is heavy on html/css. For frontend development, I have professional experience with frameworks like Blazor, React, Vite, and Next.js. For backend development I have used .NET and Node.js with PostgreSQL or MySQL. I also have experience with deployment pipelines using Docker and Azure."
   },
   {
     question: "Do you take on freelance projects?",
-    answer: "Yes! I’m available for select collaborations. Feel free to reach out via the contact form or email."
+    answer: "Yes! I’m available for select collaborations. Feel free to reach out via the contact form or email, I will get back to you as soon as I can."
   },
   {
     question: "How do you approach a new project?",
-    answer: "I start with research and user stories, then iterate through prototypes, always keeping the end‑user in focus."
-  } 
+    answer: "I always start with research. Depending on the degree of difficulty, I will break the research phase into chunks to better determine which direction the project should go in. Rough drafts, design documents, and as much feedback/discussion with stakeholders as possible."
+  }
+
 ];
 ---
 
@@ -61,7 +66,6 @@ const faqItems = [
 
     <FAQ items={faqItems} />
 
-		<Footer />
 	</body>
 </html>
 
@@ -70,12 +74,11 @@ const faqItems = [
   hero-section {
     position: relative;
     width: 100%;
-    /* 1. Set a taller height to give the left column room to scroll */
-    min-height: 180vh; 
+    min-height: 110vh; 
     background: #F8B71D;  
     padding-bottom: var(--space-2xl);
     display: flex;
-    align-items: flex-start; /* Keeps the grid pinned to the top initially */
+    align-items: flex-start; /
   }
 
   hero-section::after {
@@ -94,9 +97,8 @@ const faqItems = [
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 2. Content fills the parent's full height to allow tracking */
     min-height: 100%;           
-    align-items: stretch; /* Stretches columns to match the height */
+    align-items: stretch; 
   }
 
   hero-cta-column {
@@ -106,7 +108,6 @@ const faqItems = [
     justify-content: center;
     padding: clamp(1rem, 3vmin, 4rem) clamp(1rem, 2vmin, 3rem);
     margin: 0 auto;
-    /* 3. Forces this content to take up the full first view depth while scrolling */
     min-height: 100vh; 
   }
 
@@ -139,7 +140,7 @@ const faqItems = [
   hero-cta-title h1 {
     font-size: clamp(8rem, 15rem, 30.5rem);
     line-height: 1;
-    margin: 0; /* Fixed typo from your snippet: margin_ 0 */
+    margin: 0; 
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     letter-spacing: -0.02em;
   }
@@ -149,13 +150,12 @@ const faqItems = [
     text-shadow: -1px -1px 1px rgba(0,0,0,0.15), 1px 1px 1px rgba(0,0,0,0.4);
   }
 
-  /* 4. Combined and updated the image column styling */
   hero-img-column {
-    position: sticky; /* Make the column sticky */
-    top: 0;          /* Pin it to the very top of the window */
+    position: sticky; 
+    top: 0;          
     right: 0;
     width: 100%;
-    height: 100vh;   /* Force it to be exactly 100% viewport height */
+    height: 100vh;   
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -172,7 +172,7 @@ const faqItems = [
   hero-img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Guarantees the image covers the column cleanly */
+    object-fit: cover; 
     display: block;
   }
 
@@ -207,8 +207,7 @@ const faqItems = [
     font-size: 0.6rem;
   }
 
-  hero-nav-section a:hover { /* Fixed typo from your snippet: a::hover */
-    background-color: #22223B;
+  hero-nav-section a:hover {
     font-size: clamp(1.1rem, 1.5vw, 1.5rem);
   }
 </style>
