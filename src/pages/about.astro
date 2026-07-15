@@ -1,6 +1,8 @@
 ---
 import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 import Layout from '../layouts/BlogPost.astro';
+import berklee_show from '../assets/cafe_show_labelled.png'
+import { Image } from 'astro:assets';
 ---
 
 <Layout
@@ -10,15 +12,21 @@ import Layout from '../layouts/BlogPost.astro';
 	heroImage={AboutHeroImage}
 >
 	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+		Hello! I am a Montreal-based software developer, musician, and visual artist. I'm deeply passionate about 
+		quality experiences, and immersive products. I spent my early years performing in big bands, jazz ensembles 
+		and studying music theory, culminating in attending my dream school, <strong>Berklee College of Music</strong>. 
+		I was able to seriously improve my music writing, production and performance. I met some unbelievably talented 
+		musicians who I am priviledged to call friends, and got to play a few very cool shows. 
 	</p>
+	
+	<figure style="display: table; margin: 24px auto; text-align: center;">
+		<Image src={berklee_show} height={500} width={500} alt="large crowd at a concert" />
+		<figcaption style="font-size: 0.85rem; color: #666; margin-top: 8px; font-style: italic;">
+			Playing a packed show at the famous Berklee Cafe.
+		</figcaption>
+	</figure>
 
+	
 	<p>
 		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
 		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
