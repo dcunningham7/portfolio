@@ -1,0 +1,460 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'projects'>['data'];
+
+const {
+	title,
+	summary,
+	heroImage,
+	gallery,
+	pubDate,
+	updatedDate,
+	role,
+	stack,
+	links,
+	repoNote,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} — Project`} description={summary} image={heroImage} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<article>
+				<header class="project-title">
+					<p class="kicker">A project by Dylan</p>
+					<h1>{title}</h1>
+					<p class="logline">{summary}</p>
+				</header>
+
+				{heroImage && (
+					<figure class="project-still">
+						<Image
+							src={heroImage}
+							alt={`${title} project preview`}
+							widths={[720, 1200, 1800]}
+							sizes="100vw"
+						/>
+						<figcaption>Project still · {title}</figcaption>
+					</figure>
+				)}
+
+				<section class="credits" aria-label="Project details">
+					<div>
+						<p class="credit-label">Role</p>
+						<p>{role}</p>
+					</div>
+					<div>
+						<p class="credit-label">Released</p>
+						<p><FormattedDate date={pubDate} /></p>
+						{updatedDate && (
+							<p class="updated">
+								Updated <FormattedDate date={updatedDate} />
+							</p>
+						)}
+					</div>
+					<div>
+						<p class="credit-label">Stack</p>
+						<ul class="stack" aria-label="Technologies used">
+							{stack.map((technology) => <li>{technology}</li>)}
+						</ul>
+					</div>
+					<div>
+						<p class="credit-label">See it</p>
+						<div class="project-links">
+							{links?.live && (
+								<a href={links.live} target="_blank" rel="noreferrer">Visit live site ↗</a>
+							)}
+							{links?.repo && (
+								<a href={links.repo} target="_blank" rel="noreferrer">View source ↗</a>
+							)}
+							{repoNote && <span>{repoNote}</span>}
+						</div>
+					</div>
+				</section>
+
+				{
+					gallery && gallery.length > 0 && (
+						<section class="project-gallery" aria-label={`${title} stills`}>
+							{gallery.map((shot) => (
+								<figure class="gallery-shot">
+									<Image
+										src={shot.image}
+										alt={shot.alt ?? shot.caption ?? `${title} still`}
+										widths={[640, 960, 1400]}
+										sizes="(max-width: 800px) 100vw, 50vw"
+									/>
+									{(shot.caption || shot.alt) && (
+										<figcaption>{shot.caption ?? shot.alt}</figcaption>
+									)}
+								</figure>
+							))}
+						</section>
+					)
+				}
+
+				<div class="project-copy">
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	:global(body) {
+		background: #f4b51b;
+		color: #17130f;
+	}
+
+	main {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	article {
+		overflow: hidden;
+	}
+
+	.project-title {
+		position: relative;
+		display: grid;
+		min-height: min(56vh, 560px);
+		padding: clamp(3rem, 8vw, 7rem) clamp(1.25rem, 6vw, 6rem);
+		align-content: center;
+		background: #f4b51b;
+		isolation: isolate;
+	}
+
+	.project-title::after {
+		position: absolute;
+		z-index: -1;
+		inset: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+		content: '';
+		mix-blend-mode: multiply;
+		opacity: 0.25;
+		pointer-events: none;
+	}
+
+	.kicker,
+	.credit-label,
+	.project-still > figcaption,
+	.gallery-shot > figcaption {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+
+	.kicker {
+		padding-left: 0.25em;
+		color: #17130f;
+	}
+
+	h1 {
+		max-width: 12ch;
+		margin: 0.08em 0 0.14em;
+		color: #c8171d;
+		font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+		font-size: clamp(4rem, 14vw, 12rem);
+		font-weight: 900;
+		line-height: 0.78;
+		letter-spacing: -0.035em;
+		text-transform: uppercase;
+		text-shadow: 0.015em 0.015em 0 #17130f;
+	}
+
+	.logline {
+		max-width: 44rem;
+		margin: 0;
+		font-size: clamp(1.1rem, 2vw, 1.6rem);
+		font-weight: 700;
+		line-height: 1.35;
+	}
+
+	.project-still {
+		position: relative;
+		margin: 0;
+		padding: clamp(1rem, 3vw, 2rem);
+		background: #17130f;
+	}
+
+	.project-still :global(img) {
+		display: block;
+		width: 100%;
+		max-height: min(52vh, 560px);
+		margin-inline: auto;
+		object-fit: contain;
+		filter: contrast(1.04) saturate(0.92);
+	}
+
+	.project-still > figcaption {
+		position: absolute;
+		right: clamp(1.5rem, 4vw, 3.5rem);
+		bottom: clamp(1.35rem, 3.5vw, 2.5rem);
+		padding: 0.35rem 0.55rem;
+		background: #17130f;
+		color: #f7e8c8;
+	}
+
+	.credits {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		border-top: 2px solid #17130f;
+		border-bottom: 2px solid #17130f;
+		background: #f7e8c8;
+	}
+
+	.credits > div {
+		padding: 1.5rem clamp(1rem, 2.5vw, 2.5rem);
+		border-right: 1px solid #17130f;
+	}
+
+	.credits > div:last-child {
+		border-right: 0;
+	}
+
+	.credits p {
+		margin: 0;
+		line-height: 1.35;
+	}
+
+	.credit-label {
+		margin-bottom: 0.6rem !important;
+		color: #c8171d;
+	}
+
+	.updated {
+		margin-top: 0.25rem !important;
+		font-size: 0.75rem;
+	}
+
+	.stack {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.65rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.stack li:not(:last-child)::after {
+		margin-left: 0.65rem;
+		content: '/';
+		color: #c8171d;
+	}
+
+	.project-links {
+		display: grid;
+		gap: 0.25rem;
+		line-height: 1.35;
+	}
+
+	.project-links a {
+		width: fit-content;
+		color: #17130f;
+		font-weight: 700;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 0.2em;
+	}
+
+	.project-links a:hover {
+		color: #c8171d;
+	}
+
+	.project-links span {
+		font-size: 0.85rem;
+		font-style: italic;
+	}
+
+	.project-gallery {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0;
+		background: #17130f;
+		border-bottom: 2px solid #17130f;
+	}
+
+	.gallery-shot {
+		position: relative;
+		margin: 0;
+		padding: clamp(0.75rem, 2vw, 1.5rem);
+		border-right: 1px solid rgba(247, 232, 200, 0.2);
+		border-bottom: 1px solid rgba(247, 232, 200, 0.2);
+	}
+
+	.gallery-shot:nth-child(2n) {
+		border-right: 0;
+	}
+
+	.gallery-shot :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		object-position: top center;
+	}
+
+	.gallery-shot > figcaption {
+		margin-top: 0.75rem;
+		color: #f7e8c8;
+		letter-spacing: 0.14em;
+	}
+
+	.project-copy {
+		width: min(100% - 2.5rem, 760px);
+		margin: 0 auto;
+		padding: clamp(3rem, 8vw, 6rem) 0;
+	}
+
+	.project-copy :global(h2) {
+		margin: 2.5em 0 0.5em;
+		color: #c8171d;
+		font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+		font-size: clamp(2.5rem, 7vw, 5rem);
+		letter-spacing: 0.01em;
+		text-transform: uppercase;
+	}
+
+	.project-copy :global(h2:first-child) {
+		margin-top: 0;
+	}
+
+	.project-copy :global(h3) {
+		margin-top: 2em;
+		font-size: clamp(1.5rem, 3vw, 2rem);
+	}
+
+	.project-copy :global(p),
+	.project-copy :global(li) {
+		line-height: 1.7;
+	}
+
+	.project-copy :global(a) {
+		color: #9f1016;
+		font-weight: 700;
+		text-underline-offset: 0.2em;
+	}
+
+	.project-copy :global(blockquote) {
+		margin: 2.5rem 0;
+		padding: 1.25rem 1.5rem;
+		border: 0;
+		background: #17130f;
+		color: #f7e8c8;
+		font-size: clamp(1.25rem, 3vw, 1.8rem);
+		line-height: 1.35;
+	}
+
+	.project-copy :global(table) {
+		width: 100%;
+		margin: 1.5rem 0 2rem;
+		border-collapse: collapse;
+		font-size: 0.95rem;
+	}
+
+	.project-copy :global(th),
+	.project-copy :global(td) {
+		padding: 0.65rem 0.75rem;
+		border: 1px solid rgba(23, 19, 15, 0.25);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.project-copy :global(th) {
+		background: rgba(23, 19, 15, 0.08);
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	/* In-body figures (MDX), matching About */
+	.project-copy :global(.about-figure),
+	.project-copy :global(.project-figure) {
+		display: block;
+		margin: 2.5rem 0;
+		text-align: center;
+	}
+
+	.project-copy :global(.about-figure img),
+	.project-copy :global(.project-figure img) {
+		display: block;
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.project-copy :global(.about-figure figcaption),
+	.project-copy :global(.project-figure figcaption) {
+		margin-top: 0.65rem;
+		color: rgba(23, 19, 15, 0.65);
+		font-size: 0.85rem;
+		font-style: italic;
+		font-weight: 500;
+		letter-spacing: 0.02em;
+		text-transform: none;
+	}
+
+	@media (max-width: 800px) {
+		.credits {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.credits > div:nth-child(2) {
+			border-right: 0;
+		}
+
+		.credits > div:nth-child(-n + 2) {
+			border-bottom: 1px solid #17130f;
+		}
+
+		.project-gallery {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery-shot {
+			border-right: 0;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.project-title {
+			min-height: 48vh;
+		}
+
+		.credits {
+			grid-template-columns: 1fr;
+		}
+
+		.credits > div {
+			border-right: 0;
+			border-bottom: 1px solid #17130f;
+		}
+
+		.credits > div:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-title::after {
+			display: none;
+		}
+	}
+</style>

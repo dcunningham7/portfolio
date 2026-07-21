@@ -1,4 +1,13 @@
 
+@import './reel-title.css';
+
+.work-page {
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: 0 0 5rem;
+}
+
 /* ===== RESUME PAGE ===== */
 .resume-page {
     max-width: 1000px;

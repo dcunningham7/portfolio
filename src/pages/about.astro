@@ -1,71 +1,191 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
-import berklee_show from '../assets/cafe_show_labelled.png'
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import berklee_show from '../assets/cafe_show_labelled.png';
+import live_1 from '../assets/live_show1.jpg'
+import dyl_drums from '../assets/dyl_drums1.jpg'
+import dyl_insnow from '../assets/self/dyl_insnow.jpg'
+import nscc_group from '../assets/nscc_group_pic.jpg'
 import { Image } from 'astro:assets';
+import '../styles/reel-title.css';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Hello! I am a Montreal-based software developer, musician, and visual artist. I'm deeply passionate about 
-		quality experiences, and immersive products. I spent my early years performing in big bands, jazz ensembles 
-		and studying music theory, culminating in attending my dream school, <strong>Berklee College of Music</strong>. 
-		I was able to seriously improve my music writing, production and performance. I met some unbelievably talented 
-		musicians who I am priviledged to call friends, and got to play a few very cool shows. 
-	</p>
-	
-	<figure style="display: table; margin: 24px auto; text-align: center;">
-		<Image src={berklee_show} height={500} width={500} alt="large crowd at a concert" />
-		<figcaption style="font-size: 0.85rem; color: #666; margin-top: 8px; font-style: italic;">
-			Playing a packed show at the famous Berklee Cafe.
-		</figcaption>
-	</figure>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="About Me"
+			description="Montreal-based software developer, musician, and visual artist."
+		/>
+	</head>
 
-	
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+	<body>
+		<Header />
+		<main class="about-page">
+			<header class="reel-title">
+				<div class="reel-title-copy">
+					<p class="kicker">Musician · Developer · Artist</p>
+					<h1>About</h1>
+				</div>
+				<p class="logline">
+					My story is one about stubbornly following your dreams, and having fun along the way.  
+				</p>
+			</header>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<div class="about-content">
+				<p>
+					Hello! My name is Dylan, and I love to make stuff. I spent my early years performing in big bands, 
+					jazz ensembles and studying music theory, culminating in attending my dream school, <strong>Berklee 
+					College of Music</strong>. I was able to seriously improve my music writing, production and performance. 
+					I met some unbelievably talented musicians who	I am priviledged to call friends. I also got to play 
+					some <strong>incredible</strong> shows.
+				</p>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+				<figure class="about-figure">
+					<Image
+						src={berklee_show}
+						height={500}
+						width={500}
+						alt="large crowd at a concert"
+					/>
+					<figcaption>
+						Playing a packed show with <strong>The Trap Music Orchestra</strong> at the Berklee Cafe.
+					</figcaption>
+				</figure>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+				<figure class="about-figure">
+					<Image
+						src={live_1}
+						height={400}
+						width={820}
+						alt="large crowd at a concert"
+					/>
+					<figcaption>
+						Cheesing with the crowd during a show in Hamilton, ON (<strong>thumbs up!</strong>)
+					</figcaption>
+				</figure>
+
+				<p>
+					After Berklee I played professionally for another 5 years in various bands and solo shows. Our 
+					gigs included weddings, festivals, basements, backyards, theatres, clubs, and parties. The pay
+					was terrible and I was having the time of my life. I got to make lifelong friends, experience 
+					the joy of live music every night, and express myself through my art. Not to mention, I was 
+					playing guitar <strong>all. the. time.</strong> 13 year old Dylan would be very proud to see the 
+					life I had built. These experiences helped shape me into the person I am today. Fully ready and
+					able to face anything that comes my way. It's incredibly fulfilling to have worked so hard and 
+					achieve what I set out to do as a teenager just learning the guitar. The lessons were tough sometimes. 
+					You play poorly, get booed, or get someone pestering you for requests. The shows were mostly good. 
+				</p>
+				
+				<figure class="about-figure">
+					<Image
+						src={dyl_drums}
+						height={500}
+						width={515}
+						justify-self='center'
+						alt="large crowd at a concert"
+					/>
+					<figcaption>
+						An annual highlight: <strong> Come Together Music Festival </strong>. A bi-annual music 
+						festival showcasing talent from all over Canada, playing at a beautiful 1:1 scale wild 
+						west village in Northern Ontario. Also I play drums sometimes!
+					</figcaption>
+				</figure>
+				
+				<p> 
+					Once the Covid pandemic began, musicians weren't able to play anywhere, and thus my livelihood
+					was gone. There were no shows, no rehearsals, nothing. So I was stuck working day jobs and trying 
+					to figure out what I was going to do with myself. I decided to move to Nova Scotia to be closer to 
+					family, and to go back to school. I thought, "Well if I can't play gigs or make music, I'd like a day job
+					that is challenging and that I enjoy doing."
+				</p>
+
+				<figure class="about-figure">
+					<Image 
+						src={dyl_insnow}
+						width={500}
+						height={500}
+						alt="Walking up a snowy hill in Nova Scotia"
+					/>
+				</figure>
+
+				<p> 
+					In Nova Scotia, my partner pushed me to try programming. I’d always been into design, game development, 
+					and how systems fit together in harmony (music pun intended). I worked through Harvard’s CS50, took pages of notes, and 
+					got hooked on how computers work. That led me to apply to Nova Scotia Community College and commit to a 
+					real career shift. I’d heard musicians who understand theory often make strong programmers, and enough of 
+					the industry is full of musicians that it felt like a path where I could find my way.
+				</p>
+
+				<p>
+					I graduated after placing 2nd in the college’s first annual hackathon, and was awarded 2024-2025 Student of 
+					the Year for my role building a full-stack data-entry training app for health students. Along the way I got 
+					hands-on with a wide range of languages and tools: games, screensavers, web apps, and even basic HTTP servers 
+					in C. 
+				</p>
+
+				<figure class="about-figure">
+					<Image
+						src={nscc_group}
+						height={530}
+						width={800}
+						alt="large crowd at a concert"
+					/>
+					<figcaption>
+						My graduating class at Nova Scotia Community College. Your boy in the back! 
+					</figcaption>
+				</figure>
+
+				<p>
+					What I have learned from music, I apply directly to engineering. Practice, learn, listen, and keep showing up. I'm 
+					at my best on collaborative teams, and I care a lot about the craft of what users actually use. I'm currently looking 
+					for full-time work as a software developer. I want to keep learning fast, ship real products, and work with teams that 
+					care deeply about craft. 
+					
+				</p> 
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about-page {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		padding: 0 0 5rem;
+	}
+
+	.about-content {
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 0 clamp(1.25rem, 6vw, 6rem) 3rem;
+		color: #17130f;
+		font-size: 1.1rem;
+		line-height: 1.7;
+	}
+
+	.about-content p {
+		margin: 0 0 1.5rem;
+	}
+
+	.about-figure {
+		display: table;
+		margin: 2rem auto;
+		text-align: center;
+	}
+
+	.about-figure img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.about-figure figcaption {
+		margin-top: 0.5rem;
+		color: rgba(23, 19, 15, 0.65);
+		font-size: 0.85rem;
+		font-style: italic;
+	}
+</style>

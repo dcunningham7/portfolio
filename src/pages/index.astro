@@ -51,9 +51,11 @@ const faqItems = [
               </hero-cta-title>
               
               <hero-nav-section> 
-                <a href="/blog">Projects</a>
-                <a href="/about">About Me</a>
+                <a href="/projects">Projects</a>
                 <a href="/work">Work</a>
+                
+                <a href="/about">About Me</a>
+                
               </hero-nav-section>
             </hero-cta-section>
           </hero-cta-column>  
@@ -66,6 +68,8 @@ const faqItems = [
 
 
       </hero-content>
+
+      <div class="hero-logo-mark" aria-hidden="true">logo</div>
     </hero-section>
 
     <FAQ items={faqItems} />
@@ -78,11 +82,11 @@ const faqItems = [
   hero-section {
     position: relative;
     width: 100%;
-    min-height: 110vh; 
+    min-height: 250vh; 
     background: #F8B71D;  
     padding-bottom: var(--space-2xl);
     display: flex;
-    align-items: flex-start; /
+    align-items: flex-start; 
   }
 
   hero-section::after {
@@ -101,8 +105,8 @@ const faqItems = [
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 100%;           
-    align-items: stretch; 
+    min-height: 250vh;           
+    align-items: start;
   }
 
   hero-cta-column {
@@ -121,15 +125,16 @@ const faqItems = [
 
   hero-label {
     display: block;
-    font-family: 'Courier New', monospace;
-    font-size: clamp(0.7rem, 1vw, 0.9rem);
+    font-family: 'ITC Bookman', sans-serif;
+    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
     color: #000;
     margin-bottom: var(--space-md);
     width: fit-content;
     animation: fadeInLeft 0.8s ease-out;
     padding-left: 60%;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.15);
   }
 
   hero-cta-title {
@@ -142,7 +147,7 @@ const faqItems = [
   }
 
   hero-cta-title h1 {
-    font-size: clamp(8rem, 15rem, 30.5rem);
+    font-size: clamp(10rem, 20rem, 37rem);
     line-height: 1;
     margin: 0; 
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -163,7 +168,7 @@ const faqItems = [
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
 
   hero-img {
@@ -191,8 +196,8 @@ const faqItems = [
   }
 
   hero-nav-section a {
-    font-family: 'Courier New', monospace;
-    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+    font-family: 'ITC Bookman', sans-serif;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -202,17 +207,40 @@ const faqItems = [
     text-decoration: none;
     transition: all 0.2s ease;
     position: relative;
-  }
-
-  hero-nav-section a::after {
-    content: '●';
-    color: #D61A1F;
-    margin-left: 0.5rem;
-    font-size: 0.6rem;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.15), 1px 1px 1px rgba(0,0,0,0.4);
   }
 
   hero-nav-section a:hover {
-    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    content: '●';
+    color: #D61A1F;
+    margin-left: 0.5rem;
+  }
+
+  .hero-logo-mark {
+    position: absolute;
+    left: 25%;
+    top: 62%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: min(42vw, 22rem);
+    height: min(42vw, 22rem);
+    border-radius: 50%;
+    background: #17130f;
+    color: #f7e8c8;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .hero-logo-mark {
+      width: min(55vw, 14rem);
+      height: min(55vw, 14rem);
+    }
   }
 </style>
 

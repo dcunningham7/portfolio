@@ -17,4 +17,38 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+
+const projects = defineCollection({
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			summary: z.string(),
+			heroImage: image().optional(),
+			gallery: z
+				.array(
+					z.object({
+						image: image(),
+						caption: z.string().optional(),
+						alt: z.string().optional(),
+					}),
+				)
+				.optional(),
+			pubDate: z.coerce.date(),
+			updatedDate: z.coerce.date().optional(),
+			// Meta row on case-study pages
+			role: z.string(),
+			stack: z.array(z.string()),
+			links: z
+				.object({
+					live: z.string().url().optional(),
+					repo: z.string().url().optional(),
+				})
+				.optional(),
+			repoNote: z.string().optional(),
+			featured: z.boolean().default(false),
+			order: z.number().optional(),
+		}),
+});
+
+export const collections = { blog, projects };

@@ -1,74 +1,108 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
-import linkedin_logo from '../assets/linkedin.svg'
+
+const year = new Date().getFullYear();
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+<header class="site-header">
+	<nav aria-label="Primary navigation">
+		<a class="identity" href="/">
+			<span class="index-mark">DJ / {year}</span>
+			<span class="site-title">{SITE_TITLE}</span>
+		</a>
 		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-			<HeaderLink href="/blog">Projects</HeaderLink>
+			<HeaderLink href="/projects">Projects</HeaderLink>
 			<HeaderLink href="/work">Work</HeaderLink>
-		</div>
-		<div class="social-links">
-			
-			  <a href="https://linkedin.com/in/dylancdev" target="_blank">
-				<img id="linkedinlogo" src={linkedin_logo.src} style="height: 32px; width: 32px;" alt="" />
-				<span class="sr-only">Connect with me on LinkedIn</span>
-			</a>
-			<a href="https://github.com/ProgramDyl" target="_blank">
-				<span class="sr-only">Go to my GitHub</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
-			</a>
+			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 	</nav>
 </header>
+
 <style>
-	header {
+	.site-header {
 		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+		padding: 0 clamp(1rem, 3vw, 2.5rem);
+		border-bottom: 2px solid #c8171d;
+		background: #17130f;
+		color: #f7e8c8;
 	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		min-height: 3.75rem;
+		gap: 2rem;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
+
+	.identity {
 		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		color: #f7e8c8;
+		text-decoration: none;
 	}
+
+	.index-mark {
+		padding: 0.2rem 0.4rem;
+		background: #f4b51b;
+		color: #17130f;
+		font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		line-height: 1;
+	}
+
+	.site-title {
+		font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+		font-size: 1.15rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.internal-links {
+		display: flex;
+		align-items: stretch;
+		gap: clamp(0.75rem, 2vw, 2rem);
+		align-self: stretch;
+	}
+
+	.internal-links :global(a) {
+		display: flex;
+		align-items: center;
+		padding: 0.25rem 0;
+		border-bottom: 3px solid transparent;
+		color: #f7e8c8;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.internal-links :global(a:hover),
+	.internal-links :global(a.active) {
+		border-bottom-color: #c8171d;
+		color: #f4b51b;
+		text-decoration: none;
+	}
+
 	@media (max-width: 720px) {
-		.social-links {
+		.site-header {
+			padding-inline: 1rem;
+		}
+
+		.site-title {
 			display: none;
+		}
+
+		.internal-links {
+			gap: 0.8rem;
+		}
+
+		.internal-links :global(a) {
+			font-size: 0.62rem;
 		}
 	}
 </style>
