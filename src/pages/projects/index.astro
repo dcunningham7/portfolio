@@ -6,7 +6,9 @@ import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
 import '../../styles/reel-title.css';
 
-const projects = (await getCollection('projects')).sort((a, b) => {
+const projects = (await getCollection('projects'))
+	.filter((project) => !project.data.draft)
+	.sort((a, b) => {
 	const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
 	const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
 	if (orderA !== orderB) return orderA - orderB;

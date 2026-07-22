@@ -132,7 +132,7 @@ const {
 	.project-title {
 		position: relative;
 		display: grid;
-		min-height: min(56vh, 560px);
+		min-height: min(80vh, 660px);
 		padding: clamp(3rem, 8vw, 7rem) clamp(1.25rem, 6vw, 6rem);
 		align-content: center;
 		background: #f4b51b;
@@ -190,23 +190,24 @@ const {
 	.project-still {
 		position: relative;
 		margin: 0;
-		padding: clamp(1rem, 3vw, 2rem);
+		padding: clamp(0.75rem, 2vw, 1.25rem);
 		background: #17130f;
 	}
 
 	.project-still :global(img) {
 		display: block;
 		width: 100%;
-		max-height: min(52vh, 560px);
+		max-height: min(90vh, 900px);
 		margin-inline: auto;
-		object-fit: contain;
+		object-fit: fit;
+		object-position: top center;
 		filter: contrast(1.04) saturate(0.92);
 	}
 
 	.project-still > figcaption {
 		position: absolute;
-		right: clamp(1.5rem, 4vw, 3.5rem);
-		bottom: clamp(1.35rem, 3.5vw, 2.5rem);
+		right: clamp(1.25rem, 3vw, 2.5rem);
+		bottom: clamp(1rem, 2.5vw, 2rem);
 		padding: 0.35rem 0.55rem;
 		background: #17130f;
 		color: #f7e8c8;
@@ -320,11 +321,11 @@ const {
 	.project-copy {
 		width: min(100% - 2.5rem, 760px);
 		margin: 0 auto;
-		padding: clamp(3rem, 8vw, 6rem) 0;
+		padding: clamp(2.5rem, 6vw, 4.5rem) 0;
 	}
 
 	.project-copy :global(h2) {
-		margin: 2.5em 0 0.5em;
+		margin: 2rem 0 0.65rem;
 		color: #c8171d;
 		font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 		font-size: clamp(2.5rem, 7vw, 5rem);
@@ -337,12 +338,13 @@ const {
 	}
 
 	.project-copy :global(h3) {
-		margin-top: 2em;
+		margin-top: 1.5rem;
 		font-size: clamp(1.5rem, 3vw, 2rem);
 	}
 
 	.project-copy :global(p),
 	.project-copy :global(li) {
+		margin-bottom: 0.85rem;
 		line-height: 1.7;
 	}
 
@@ -388,7 +390,7 @@ const {
 	.project-copy :global(.about-figure),
 	.project-copy :global(.project-figure) {
 		display: block;
-		margin: 2.5rem 0;
+		margin: 1.75rem 0;
 		text-align: center;
 	}
 
@@ -398,6 +400,15 @@ const {
 		width: 100%;
 		max-width: 100%;
 		height: auto;
+	}
+
+	.project-copy :global(ol) {
+		padding-left: 1.25rem;
+		margin: 0 0 1rem;
+	}
+
+	.project-copy :global(strong) {
+		font-weight: 700;
 	}
 
 	.project-copy :global(.about-figure figcaption),

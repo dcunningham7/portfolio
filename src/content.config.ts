@@ -47,6 +47,7 @@ const projects = defineCollection({
 				.optional(),
 			repoNote: z.string().optional(),
 			featured: z.boolean().default(false),
+			draft: z.boolean().default(false),
 			order: z.number().optional(),
 		}),
 });

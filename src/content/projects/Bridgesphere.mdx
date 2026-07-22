@@ -1,6 +1,6 @@
 ---
 title: BridgeSphere
-summary: Three-sided real-estate matchmaking for clients, agents, and brokerages. Primary full-stack engineer from graduate hire through Azure production.
+summary: Real estate networking platform MVP, contracted to architect whole platform and infrastructure. Primary full-stack engineer from graduate hire to 1.0 launch. (All visuals contain demo data)
 pubDate: 2025-08-01
 role: Primary full-stack engineer
 stack:
@@ -15,77 +15,149 @@ links:
 repoNote: Private repo under NDA
 featured: true
 order: 1
-heroImage: '../../assets/bs/BS_home.png'
+heroImage: '../../assets/bs/bs_hero.png'
 gallery:
-  - image: '../../assets/bs/BS_home.png'
-    caption: Home / landing
+  - image: '../../assets/bs/bs_login_dark.png'
+    caption: Login / Signup (Dark mode)
     alt: BridgeSphere home screen
-  - image: '../../assets/bs/BS_map_component.png'
-    caption: Map & service zones
-    alt: Mapbox service zone drawing interface
-  - image: '../../assets/bs/agent_profile_light.png'
-    caption: Role profiles
+  - image: '../../assets/bs/bs_dashboard_container.png'
+    caption: Agent Dashboard (Light Mode)
+    alt: Agent dashboard for selecting matches and viewing saved matches/analytics
+  - image: '../../assets/bs/bs_profile.png'
+    caption: Role-based profiles (w/ Cover Photos and Profile Images)
     alt: BridgeSphere multi-role profile, with editing
-  - image: '../../assets/bs/BS_dashboard_component.png'
-    caption: Dashboard & matches
+  - image: '../../assets/bs/bs_settings_container1.png'
+    caption: User settings and account preferences
+    alt: Agent dashboard with match lists and analytics
+  - image: '../../assets/bs/bs_matching1.png'
+    caption: Matching Dashboard (Agent→Client)
+    alt: BridgeSphere multi-role profile, with editing
+  - image: '../../assets/bs/bs_onboarding_container1.png'
+    caption: Role-Specific Onboarding forms
+    alt: Agent dashboard with match lists and analytics
+  - image: '../../assets/bs/bs_matching2.png'
+    caption: Matching Dashboard (Agent→Client)
+    alt: BridgeSphere multi-role profile, with editing
+  - image: '../../assets/bs/bs_archetypes.png'
+    caption: Aggregated data into archetypes to automate the onboarding process
     alt: Agent dashboard with match lists and analytics
 ---
 
 import { Image } from 'astro:assets';
 import mapShot from '../../assets/bs/map_screenshot.png';
-import wireframe from '../../assets/bs/home_wf.png';
+import architecture_diagram from '../../assets/bs/BS_architecture_diagram.png';
+import matchPipeline from '../../assets/bs/BS_match_pipeline.png'
+import matching1 from '../../assets/bs/bs_matching1.png'
 
-## The problem
+## The Scenario
 
-Clients struggle to find agents who fit their goals and locations. Agents need qualified leads in their service areas. Brokerages need to recruit agents who align with brand and territory. Most tools don't treat those three sides as one product.
-The pitch was a network for all three types to do business.
+A product owner approached me after his real-estate networking project had stalled. The previous 
+developer had left five weeks in, with an empty GitHub amd some technical documents to show for it. 
+I came on as the sole engineer on a contract basis and spent over one year building the application 
+from the ground up: architecture, every line of production code, the roadmap, and day-to-day 
+iteration directly with the founder.
 
-## Role
+## The Role
 
-I joined as a recent graduate and became the primary engineer: React SPA, ASP.NET Core API, matching UX, geospatial product work, and Azure CI/CD through production. Product leadership sat with Milad Akrami; other collaborators contributed on the frontend. Day-to-day delivery, deploys, and production issues sat largely on me.
+As a recent grad, this was the deep end: I was responsible for the whole platform.
 
-## Architecture
+- Architecture design and system diagramming
+- Frontend (React SPA) and backend (ASP.NET Core API)
+- Database schema, indexing, geospatial queries, and vector search
+- Matching pipeline design and optimization
+- Authentication, security, and role-based access control
+- Infrastructure, CI/CD, and production operations
+- Requirements gathering, sprint planning, and client demos
+- Direct collaboration with the founder on product direction
 
-Monorepo with a React SPA on Azure Static Web Apps, an ASP.NET Core 8 API on App Service, PostgreSQL with PostGIS and pgvector, Mapbox for maps, a FastAPI embedding sidecar, and an Azure Functions image pipeline. <strong>Environments: Dev, QA, and Prod.</strong>
+## What I Built
+
+A monorepo: a React SPA on Azure Static Web Apps, an ASP.NET Core 8 API on App Service, PostgreSQL with 
+PostGIS and pgvector, Mapbox for maps, a FastAPI embedding sidecar, and an Azure Functions image pipeline. 
+Environments promote through Dev, QA, and Prod.
+
 
 <figure class="project-figure">
-  <Image src={wireframe} width={1200} height={800} alt="Early BridgeSphere home wireframe" />
-  <figcaption>Early home wireframe before the production UI landed.</figcaption>
+  <Image src={architecture_diagram} width={1500} height={1100} alt="Architecture diagram of the BridgeSphere system" />
+  <figcaption>
+    React SPA → App Service API → PostgreSQL/PostGIS/pgvector, with Mapbox, SendGrid, a 
+    FastAPI embedding service, and an Azure Functions image pipeline as satellite services, 
+    all shipped through a Dev → QA → Prod pipeline.
+  </figcaption>
 </figure>
 
-## Matching (public version)
+## Matching
 
-Matching is a hybrid pipeline: geospatial filtering, structured preference scoring by role, semantic similarity via embeddings in pgvector, then ranking with list caching and invalidation after profile changes. Exact weights and formulas stay proprietary.
-
-> I combined structured scorers in C#, vector embeddings (MiniLM via a FastAPI sidecar), and PostGIS-aware geo filters, then cached ranked lists with invalidation, because matching was expensive enough that rate limits and cache policy were required. 
+### Problem: 
+Early match requests recomputed too much per call: geo candidates, scoring, and embedding similarity. All at once. 
+Under realistic profile volumes, lists felt slow, and repeated dashboard loads made it worse. A full recompute on every request 
+was the wrong default.
 
 <figure class="project-figure">
-  <Image src={mapShot} width={1200} height={800} alt="BridgeSphere map with geographic matching context" />
-  <figcaption>Location is a first-class matching dimension, not just a map widget.</figcaption>
+  <Image
+    src={matchPipeline}
+    width={1199}
+    height={256}
+    alt="BridgeSphere hybrid match pipeline: criteria, geo filter, scorers, semantic embeddings, then rank and cache"
+  />
+  <figcaption>Public view of the match pipeline. Weights and score breakdowns stay off the page under NDA.</figcaption>
 </figure>
 
-## Hard parts
+### Constraints
+Data freshness mattered. Agents, Clients, and Brokerages may change service zones and preferences often enough that a 
+stale list will harm trust and user experience. Caching the data without a clearly defined invalidation story was
+showing incorrect matches, based on stale data. Prior to implementing PostGIS, there was a N+1 problem in the code, where all 
+eligble matches within a large radius were called at once. Then scorers and rank/cache would run across this massive data set. 
+I used the haversine formula for all matches within 300km of the primary location of the user, these bugs were causing fetch
+requests to take up to 20 seconds to match with 50+ paginated agents.
 
-- **Multi-role surface:** One codebase for clients, agents, and brokerages. Shared primitives (auth, maps, cards) had to stay consistent while each path felt purpose-built.
-- **Maps as a first-class dimension:** Agents draw service zones; clients mark preferred areas. Location drives matching, not just display.
-- **API evolution:** Migrated toward a cleaner v3 surface while keeping v2 write paths alive so production never broke mid-migration.
-- **Production ownership:** Dev to QA to Prod promotion, DNS for bridgesphere.ca, cookie-based auth, rate limits, CORS, and cold-start issues on the API tier.
+### Approach
+I treated matching as a pipeline with an expensive tail, and so it was best to optimize the tail-end of the operation:
+
+- Ran geo filtering early by moving calculations from C# level to PostGIS in PostgreSQL. This caused later stages to work on
+a much smaller set of data. 
+- Ran scoring and semantic similarity only on that filtered set.
+- Cached ranked lists in memory, keyed by requester and match direction. 
+- Invalidated the cache on profile and location writes, so edits surfaced on the next meaningful read.
+- Added stricter rate limiting on match endpoints in production so retries and abuse couldn't amplify cost.
+
+The embedding service ran as a separate FastAPI sidecar rather than inside the .NET API. That kept the main service focused, but 
+it also meant cold starts and timeouts were real failure modes I had to design around in the match path.
+
+### Result
+Match lists became usable for everyday dashboard traffic, and production held up under normal load. Latency is still an honest 
+constraint at scale: better async refresh and smarter caching are the next levers if the user base grows.
+
+### What I'd do next
+Move more of the heavy recompute off the request path entirely (queue or background refresh), tighten cache keys 
+around the specific fields that actually change scores, and add load testing (k6) as a release gate on match endpoints.
+
+## Hard Parts
+- Multi-role surface. One codebase for clients, agents, and brokerages. Shared primitives (auth, maps, cards, save/unsave)
+had to stay consistent while each role's path felt complete.
+
+- Mapping was a core feature, not simply decoration. This required a great deal of reading the MapBox documentation. 
+Agents/Brokerages draw service zones; clients mark preferred areas. Geography actively drives who 
+shows up in a match list, not just where a pin sits on a map.
+
+- API iteration and maintainability during requirement evolution. I chose to use the "Strangler Fig Pattern" to slowly 
+migrate toward a cleaner v3 API surface while keeping v2 write paths alive, so production never broke mid-migration.
+
+- Production ownership. Dev → QA → Prod promotion, DNS, cookie-based auth, rate limits, CORS, and API cold-start issues. 
+Operations was critical part of the engineering job, and was never treated like an afterthought. All code was subject to
+a strict automated testing and promotion pipeline, using Bash Shell scripting.
 
 ## Tradeoffs
+| Decision | Tradeoff | Justification |
+| -------- | -------- | ------------- |
+| Hybrid matching + cache | Latency vs data freshness | Full recompute on every request was expensive and slow | 
+| Dual v2/v3 APIs | Complexity vs Continuity | I determined it wasn't feasible to re-write the entire API at once. |
+| Separate embedding sidecar | Extra ops | Kept the .NET API focused and RESTful. | 
 
-| Decision | Tradeoff | Why |
-|----------|----------|-----|
-| Hybrid matching + cache | Latency vs freshness | Full recompute was too slow |
-| v2/v3 dual APIs | Complexity vs continuity | Could not big-bang migrate in production |
-| Embeddings sidecar | Extra ops vs capability | Kept the .NET API focused |
-| Hide score breakdown | Transparency vs IP | Protect methodology while keeping curated lists |
+## Reflection 
+Besides having to learn on the go every day, the biggest lesson I took was that production itself is a feature. Knowing what
+not to expose in the UI, secrets management, branch promotion, DNS, and ops were just as critical as map demos and matching 
+algorithms. 
 
-## Results
-
-Shipped a live multi-role product on Azure with match lists, map-driven zones, auth and onboarding, saved profiles, analytics, and an image pipeline. CI/CD promotes through Dev, QA, and Prod.
-
-Honest gaps: messaging and scheduling did not ship; UI libraries need consolidation; matching latency is still a product constraint.
-
-## Reflection
-
-The biggest lesson was that production is a feature. Matching and Mapbox demos matter, but so do branch promotion, secrets, DNS, and knowing what not to expose in the UI. I went from limited professional experience to owning a full-stack, multi-environment system end to end.
+I went from limited professional experience to owning and engineering a full-stack, multi-environment system end-to-end. This
+includes all the unglamorous work that separates a basic demo from a real, bonafide product. 
