@@ -142,11 +142,17 @@ const posters = projects.map((project, index) => ({
 		order: -1;
 	}
 
-	.poster-number {
+	.poster-meta-right {
 		position: absolute;
 		z-index: 2;
 		top: 1.5rem;
-		left: clamp(1rem, 3vw, 2rem);
+		right: clamp(1rem, 3vw, 2rem);
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.poster-number {
 		padding: 0.25rem 0.45rem;
 		background: #f4b51b;
 		color: #17130f;
@@ -332,7 +338,7 @@ const posters = projects.map((project, index) => ({
 
 		.poster-number {
 			top: 1rem;
-			left: 1rem;
+			: 1rem;
 			font-size: 0.95rem;
 			padding: 0.25rem 0.5rem;
 		}
