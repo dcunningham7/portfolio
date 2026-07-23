@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import Header from '../../components/Header.astro';
-import '../../styles/reel-title.css';
+import PageHeader from '../../components/PageHeader.astro';
 
 const projects = (await getCollection('projects'))
 	.filter((project) => !project.data.draft)
@@ -31,15 +31,11 @@ const posters = projects.map((project, index) => ({
 	<body>
 		<Header />
 		<main>
-			<header class="reel-title">
-				<div class="reel-title-copy">
-					<p class="kicker">Selected works</p>
-					<h1>Projects</h1>
-				</div>
-				<p class="logline">
-					Project showcases, case studies, builds, & experiments in software development.
-				</p>
-			</header>
+			<PageHeader
+				title="Projects"
+				kicker="Selected Works"
+				logline="Project showcases, case studies, builds, & experiments in software development."
+			/>
 
 			<section class="reel" aria-label="Project list">
 				{

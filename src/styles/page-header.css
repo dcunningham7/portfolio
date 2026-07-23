@@ -1,0 +1,83 @@
+.reel-title {
+	width: 100%;
+	padding-top: clamp(3rem, 8vh, 6rem);
+	padding-bottom: clamp(3rem, 8vh, 5rem);
+
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.reel-title-copy {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.kicker {
+	margin: 0;
+
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
+.reel-title h1 {
+	margin: 0;
+
+	font-family: Impact, Haettenschweiler, 
+		"Arial Narrow Bold", sans-serif;
+
+	font-size: clamp(6rem, 14vw, 14rem);
+	line-height: 0.8;
+	letter-spacing: -0.05em;
+	text-transform: uppercase;
+}
+
+.logline {
+	margin: 0;
+
+	max-width: 42rem;
+
+	font-size: clamp(1rem, 2vw, 1.35rem);
+	line-height: 1.5;
+	font-weight: 600;
+}
+
+
+/* Tablet */
+
+@media (max-width: 820px) {
+
+	.reel-title {
+		padding: 2.5rem 1rem 3rem;
+	}
+
+	.reel-title h1 {
+		font-size: clamp(4rem, 20vw, 8rem);
+	}
+
+	.logline {
+		font-size: 1.05rem;
+		max-width: 30rem;
+	}
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+	.reel-title {
+		padding: 1.5rem 0.75rem 2.5rem;
+	}
+
+	.reel-title h1 {
+		font-size: clamp(3.5rem, 18vw, 6rem);
+	}
+
+	.logline {
+		font-size: 0.95rem;
+	}
+}

@@ -1,0 +1,22 @@
+---
+import '../styles/page-header.css';
+
+interface Props {
+	title: string;
+	kicker: string;
+	logline: string;
+}
+
+const { title, kicker, logline } = Astro.props;
+---
+
+<header class="reel-title">
+	<div class="reel-title-copy">
+		<p class="kicker">{kicker}</p>
+		<h1>{title}</h1>
+	</div>
+
+	<p class="logline">
+		{logline}
+	</p>
+</header>
