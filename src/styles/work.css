@@ -10,9 +10,10 @@
 
 /* ===== RESUME PAGE ===== */
 .resume-page {
-    max-width: 1000px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0.5rem 0 3rem;
+    padding: 0 clamp(2rem, 5vw, 5rem) 5rem;
 }
 
 /* ===== HEADER ===== */
@@ -81,9 +82,9 @@
 }
 
 .left-col .date-range {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.95rem;
-    color: #D61A1F;
+    color: rgba(0,0,0,.55);
     letter-spacing: -0.01em;
 }
 
@@ -135,9 +136,15 @@
     font-size: 0.92rem;
     color: rgba(34, 34, 59, 0.85);
     line-height: 1.5;
-    margin-bottom: 0.35rem;
+    margin-bottom: .8rem;
     position: relative;
     padding-left: 0.3rem;
+}
+
+.right-col h3{
+    font-size:1.5rem;
+    line-height:1.2;
+    margin-bottom:.4rem;
 }
 
 .right-col ul li::before {
@@ -274,27 +281,54 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+    .resume-page {
+        width: 85%;
+        margin: 0 auto;
+        padding: 0 1.5rem 2rem;
+    }
+    
+    .experience-grid {
+        display: block;
+    }
+
+    
     .experience-grid,
     .education-grid {
         grid-template-columns: 1fr;
         gap: 0.5rem 0;
-        padding: 1.25rem 0;
+        padding: 2.5rem 0;
     }
 
-    .experience-grid:hover,
-    .education-grid:hover {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
+    .experience-grid:hover{
+        background:none;
+        padding-left:0;
+        padding-right:0;
+        margin:0;
     }
 
-    .left-col {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 0.2rem 0.6rem;
-        padding-top: 0;
+    .reel-title {
+        margin-top: 0;
+        padding-top: clamp(2rem, 6vh, 5rem);
+        padding-bottom: 5rem;
+        text-align: left;
+	}
+
+	.reel-title h1 {
+		font-size: clamp(8rem, 12vw, 16rem);
+		line-height: .85;
+		letter-spacing: -.05em;
+		margin: 0;
+	}
+
+    .logline {
+        font-size: 2em;
+    }
+
+    .left-col{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:.35rem;
     }
 
     .left-col .date-range {
@@ -313,6 +347,11 @@
     .right-col h3 {
         font-size: 1.1rem;
         margin-top: 0.2rem;
+    }
+
+    .right-col ul li{
+        font-size:1rem;
+        line-height:1.75;
     }
 
     .resume-header h1 {
