@@ -10,10 +10,9 @@
 
 /* ===== RESUME PAGE ===== */
 .resume-page {
-    width: 100%;
-    max-width: 100%;
-    margin-left: 1rem;
-    padding: 0rem;
+    width: 60svw;
+    max-width: 70svw;
+    padding-left: 15em;
 }
 
 /* ===== HEADER ===== */
