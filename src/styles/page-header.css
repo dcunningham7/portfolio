@@ -33,7 +33,7 @@
 
 	font-size: clamp(6rem, 14vw, 14rem);
 	line-height: 0.8;
-	letter-spacing: -0.05em;
+	letter-spacing: -0.02em;
 	text-transform: uppercase;
 }
 
