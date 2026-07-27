@@ -9,6 +9,7 @@ import dyl_insnow from '../assets/self/dyl_insnow.jpg'
 import nscc_group from '../assets/nscc_group_pic.jpg'
 import { Image } from 'astro:assets';
 import '../styles/reel-title.css';
+import FloatingContact from '../components/FloatingContactBtn.astro';
 ---
 
 <html lang="en">
@@ -161,6 +162,7 @@ import '../styles/reel-title.css';
 			</div>
 		</main>
 		<Footer />
+		<FloatingContact />
 	</body>
 </html>
 
@@ -175,20 +177,6 @@ import '../styles/reel-title.css';
 		margin: 0 auto 2rem;
 		font-size: 1.15rem;
 		line-height: 1.9;
-	}
-
-	.reel-title {
-		margin-top: 0;
-		padding-top: clamp(2rem, 6vh, 5rem);
-		padding-bottom: 5rem;
-		text-align: left;
-	}
-
-	.reel-title h1 {
-		font-size: clamp(10rem, 10vw, 16rem);
-		line-height: .85;
-		letter-spacing: -.05em;
-		margin: 0;
 	}
 
 	.about-content > p:first-child{
@@ -250,15 +238,7 @@ import '../styles/reel-title.css';
 	}
 
 	@media (max-width:850px){
-		
-		.reel-title h1 {
-			font-size: clamp(8rem, 12vw, 10rem);
-		}
 
-		about-page {
-			width: 100%;
-			overflow: hidden;
-		}
 
 	}
 </style>

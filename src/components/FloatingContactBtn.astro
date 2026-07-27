@@ -1,0 +1,233 @@
+---
+// No props needed
+---
+
+<button id="contactBtn" class="floating-btn">
+  <span class="btn-text">CONTACT</span>
+  <span class="btn-icon"> ! </span>
+</button>
+
+<!-- Hidden contact modal -->
+<div id="contactModal" class="modal" style="display:none">
+  <div class="modal-content">
+    <span id="closeModal" class="close">✕</span>
+    <h3>GET IN TOUCH</h3>
+    <div class="divider"></div>
+    <a href="mailto:dylancunningham.dev@email.com" class="contact-option">EMAIL</a>
+    <a href="https://cal.com/dylan-p66g00/meeting" class="contact-option">BOOK A CALL</a>
+    <a href="https://linkedin.com/in/dylancdev" class="contact-option">LINKEDIN</a>
+    
+  </div>
+</div>
+
+<style>
+  /* === BUTTON STYLES === */
+  .floating-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px 14px 26px;
+    background: #c8171d;  /* Kill Bill red */
+    color: #f5f0e8;       /* off-white like aged paper */
+    border: 3px solid #17130f;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 
+      6px 6px 0 #17130f,
+      0 8px 24px rgba(0,0,0,0.4);
+    z-index: 999;
+    transition: all 0.15s ease;
+    border-radius: 0;  /* Swiss precision - no rounded corners */
+  }
+
+  .floating-btn:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 
+      9px 9px 0 #17130f,
+      0 12px 32px rgba(0,0,0,0.5);
+    background: #d91e24;
+  }
+
+  .floating-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 
+      3px 3px 0 #17130f,
+      0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .btn-text {
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .btn-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.3));
+  }
+
+  /* === MODAL STYLES === */
+  .modal {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    background: #f5f0e8;  /* aged paper */
+    border: 3px solid #17130f;
+    padding: 32px 28px 28px;
+    box-shadow: 
+      8px 8px 0 #17130f,
+      0 12px 40px rgba(0,0,0,0.3);
+    z-index: 1000;
+    min-width: 220px;
+    border-radius: 0;
+    animation: slideUp 0.2s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal-content h3 {
+    margin: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.12em;
+    color: #17130f;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(200, 23, 29, 0.2);
+  }
+
+  .divider {
+    height: 2px;
+    background: #c8171d;
+    margin: 4px 0 8px;
+    width: 40px;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #17130f;
+    transition: color 0.15s;
+    line-height: 1;
+    font-family: Impact, sans-serif;
+  }
+
+  .close:hover {
+    color: #c8171d;
+  }
+
+  .contact-option {
+    padding: 10px 16px;
+    background: transparent;
+    border: 2px solid #17130f;
+    text-decoration: none;
+    color: #17130f;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    transition: all 0.15s ease;
+    border-radius: 0;
+  }
+
+  .contact-option:hover {
+    background: #c8171d;
+    color: #f5f0e8;
+    border-color: #c8171d;
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 #17130f;
+  }
+
+  /* === NOISE TEXTURE (matching your style) === */
+  .modal::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+    content: '';
+    mix-blend-mode: multiply;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 640px) {
+    .floating-btn {
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 16px 12px 20px;
+      box-shadow: 4px 4px 0 #17130f;
+    }
+
+    .floating-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 #17130f;
+    }
+
+    .btn-text {
+      font-size: 0.7rem;
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+    }
+
+    .modal {
+      bottom: 80px;
+      right: 16px;
+      left: 16px;
+      min-width: unset;
+      padding: 24px 20px 20px;
+      box-shadow: 6px 6px 0 #17130f;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('contactBtn');
+  const modal = document.getElementById('contactModal');
+  const close = document.getElementById('closeModal');
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+  });
+
+  close.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (modal.style.display === 'block' && 
+        !modal.contains(e.target) && 
+        e.target !== btn) {
+      modal.style.display = 'none';
+    }
+  });
+</script>

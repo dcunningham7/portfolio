@@ -6,6 +6,8 @@ import Header from '../components/Header.astro';
 import FAQ from '../components/FAQ.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import heroImage from '../assets/Dyl-inForest-sun.jpg';
+import djLogo from '../assets/dj_logo.png'
+import FloatingContact from '../components/FloatingContactBtn.astro';
 
 
 
@@ -52,6 +54,7 @@ const faqItems = [
       <hero-content> 
         <hero-cta-column>  
           <hero-cta-section>    
+
             <hero-label>Musician turned software developer passionate about creating immersive experiences.</hero-label>
             <hero-cta-title> 
               <h1>Dylan</h1>
@@ -77,6 +80,7 @@ const faqItems = [
     <!-- <div class="hero-logo-mark" aria-hidden="true">logo</div> -->
     </hero-section>
     <FAQ items={faqItems} />
+    <FloatingContact />
 	</body>
 </html>
 
