@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/work.css';
+import FloatingContact from '../components/FloatingContactBtn.astro';
 ---
 
 <html lang="en"> 
@@ -40,11 +41,20 @@ import '../styles/work.css';
                                     production uptime consistently since launch in August 2025.
                                 </li>
                                 <li>
-                                    Delivered production-ready React SPA with customizable components, multi-layered user profiles,
-                                    interactive mapping, and real-time analytics dashboard serving 300+ real estate professionals
+                                    Built a production-ready React SPA with TypeScript serving 300+ real estate professionals, featuring
+                                    customizable component libraries, multi-layered user profiles, interactive mapping via MapBox API, and a
+                                    real-time analytics dashboard
                                 </li>
                                 <li>
-                                    Built geospatial dashboards (React, MapBox) that let internal teams and clients visualize complex data immediately, cutting down on manual report requests.
+                                    Engineered a multi-tier onboarding system supporting three distinct user roles – Client, Agent, and
+                                    Brokerage – each with role-specific registration flows and permission-based matching logic. Used Form.io
+                                    for validation on the frontend, with a PostgreSQL backend powered by Entity Framework Core to manage
+                                    relational datasets
+                                </li>
+                                <li>
+                                    Orchestrated cloud infrastructure and CI/CD pipeline using Azure App Service, Docker containers, and
+                                    GitHub Actions, ensuring zero-downtime deployments and maintaining 100% production uptime since
+                                    launch in August 2025.
                                 </li>
                             </ul>
                         </div>
@@ -58,7 +68,7 @@ import '../styles/work.css';
                             <div class="work-type">ON-SITE</div>
                         </div>
                         <div class="right-col">
-                            <h3>Frontend Lead Developer – CARE Training App </h3>
+                            <h3>Frontend Developer – CARE Training App </h3>
                             <p class="role-desc"><strong>Key Achievement:</strong> Student of the Year (2024/2025) - awarded for technical contribution in delivering a quality healthcare training solution.</p>
                             <ul>
                                 <li>Architected the frontend as an SPA with component-based patient profile builders and multi-step forms organized by type, keeping complex clinical data entry manageable for non-technical nursing staff.</li>
@@ -164,7 +174,9 @@ import '../styles/work.css';
                     </div>
                 
                 </div>
+                <FloatingContact />
             </main>
+            
         <Footer />
     </body>
 </html>

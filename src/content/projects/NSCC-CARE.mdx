@@ -1,48 +1,107 @@
 ---
 title: NSCC CARE
-summary: Healthcare training SPA with patient profile builders and multi-step clinical forms for nursing staff. Frontend lead; co-delivered the MVP pitch that secured a Fall 2026 curriculum pilot.
+summary: Healthcare training app built to replace pen-and-paper data entry for nursing students at Nova Scotia Community College. I designed and co-developed a React SPA with bed-rotation visualization, patient profile builders, and multi-step clinical assessment flows.
 pubDate: 2025-06-01
-role: Frontend Lead Developer
+role: Frontend Developer
 stack:
   - React
-  - TypeScript
-  - Figma
+  - Vite
+  - JavaScript
+  - MUI / Bootstrap
   - Axios
-repoNote: Private academic / partner repo
+  - Figma
+  - GitHub Actions
+  - Azure Static Web Apps
+repoNote: Private academic repo
 featured: true
-draft: true
+draft: false
 order: 2
-heroImage: '../../assets/nscc_home.png'
+heroImage: '../../assets/care/home_rotation.png'
 gallery:
-  - image: '../../assets/nscc_home.png'
+  - image: '../../assets/care/summary.png'
     caption: CARE home
     alt: NSCC CARE training app home screen
+  - image: '../../assets/care/cognitive.png'
+    caption: Cognitive Assessment
+    alt: NSCC CARE Cognitive assessment page
+  - image: '../../assets/care/home_shift.png'
+    caption: Shift selection modal
+    alt: Home screen with shift selector
+  - image: '../../assets/care/intake_form.png'
+    caption: Patient Intake Form
+    alt: Form screen asking for basic patient information
+  - image: '../../assets/care/patient_profile.png'
+    caption: Patient Profile (demo data)
+    alt: Patient profile page with demo data
+  - image: '../../assets/care/progress.png'
+    caption: Patient Assessment (with shift change modal)
+    alt: Assessment page with shift change modal
 ---
+
+import { Image } from 'astro:assets';
+import test from '../../assets/care/home_tablet.png';
 
 ## The problem
 
-Nursing students and staff needed a manageable way to enter complex clinical training data. Dense forms and ad-hoc spreadsheets made patient profiles hard to build and easy to get wrong. The product had to feel clear to non-technical users without watering down the clinical structure.
+CARE started as an NSCC capstone project where a small team would run a short 5-7 week sprint to replace a pen-and-paper
+clinical documentation workflow used by nursing students at another campus. A faculty member approached our instructor with
+an idea for a tablet-based web application that fixed the slow, and inconsistent workflow currently in use. Most current LTC
+and Acute Care facilities use software for clinical data entry, so the instructor wanted to give the students a chance to 
+become familiar with the process before joining the workforce. 
+
+The product needed to feel like real hospital software, and needed to include bed assignments, shift handoffs, and structured 
+assessments. All without overwhelming the students who were still learning the clinical workflow itself.
+
 
 ## Role
 
-I was frontend lead on a student team building the CARE training SPA. I owned the component architecture for patient profile builders and multi-step forms, kept API contracts aligned with the backend sub-team, and co-delivered the MVP pitch to healthcare administration.
+I was assigned to own the look and feel of the app based on prior design experience. That quickly expanded into de facto frontend leadership:
+
+- **Product & UI/UX design**: low-fidelity wireframes, interactive Figma prototypes, and visual direction approval by stakeholders and team.
+- **Frontend architecture**: React SPA structure, routing, auth guards, shared state, and API integration patterns the rest of the team could build on.
+- **Component development**: most of the initial page layouts and reusable UI for patient workflows.
+- **Team liaison**: met with faculty liason for feedback, requirements gathering, facility tours, and communicated with other teammates frequently.
+- **Initial CI/CD**: GitHub Actions pipelines deploying the frontend to Azure Static Web Apps across dev and production environments.
+
+Once design was approved, the frontend team translated those flows into working React pages, ensuring the prototype and the implementation stayed aligned 
+met requirements. 
+
 
 ## Approach
 
-The frontend is a React SPA organized around reusable profile sections and typed multi-step flows. The goal was to keep clinical data entry guided and scannable: one job per step, clear progress, and components that nursing staff could actually complete under time pressure.
+The frontend is a React SPA organized around reusable profile sections and typed multi-step flows. The goal was to keep clinical data entry guided and scannable. 
+Additionally, the app would primarily be viewed on tablets which meant the components needed to be big, responsive, and highly readable. 
 
 Additional stills from the profile builder and form flows are coming once screens are scrubbed of any sensitive training data.
 
 ## Hard parts
 
-- **Domain UX:** Translating clinical structure into a UI that non-technical staff can finish without getting lost.
-- **Team liaison:** Keeping frontend and backend hand-offs documented so API contracts matched real user flows.
-- **Stakeholder pitch:** Helping present an MVP that administrators could fund and put on a curriculum roadmap.
+Design is very tough. Creating designs that are responsive on all types of devices feels impossible. It's very typical for project requirements to evolve during
+development, but building an application for desktop and finding out it'll be used almost exclusively on tablet can make for a rough day for a beginner. 
+
+<figure class="project-figure">
+  <Image
+    src={test}
+    width={900}
+    height={1200}
+    alt="NSCC CARE patient assessment page. Showing a parent child tab/page architecture."
+  />
+  <figcaption>Application would primarily be used on tablets provided by the college.</figcaption>
+</figure>
+
 
 ## Results
 
-Awarded 2024-2025 Student of the Year for technical contribution on CARE. Co-delivered the MVP pitch that helped secure continued funding and a Fall 2026 production pilot in the nursing curriculum. Placed 2nd in the college's first annual hackathon the same year.
+- Awarded **2024–2025 Student of the Year** for technical contribution on CARE. 
+- Co-delivered an MVP pitch to college admin, helping secure funding and a 
+Fall 2025 production pilot in the nursing curriculum. 
+
+
 
 ## Reflection
 
-CARE taught me that frontend leadership is as much communication as components: clear contracts, usable flows, and a story stakeholders can say yes to. More product stills will land here as scrubbed screenshots are ready.
+In the year since I graduated, the app has been used by subsequent cohorts looking to get some experience working 
+within a team. The scope of the project has expanded to Acute Care and LTC classrooms across the province, and will 
+be able to help provide students with some real world experience, which in turn will help deliver higher quality 
+healthcare to people across Nova Scotia. It's an amazing feeling knowing that the team and I created something that 
+has a positive impact on people's lives. 
