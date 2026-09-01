@@ -4,25 +4,22 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/work.css';
 import FloatingContact from '../components/FloatingContactBtn.astro';
+import PageHeader from '../components/PageHeader.astro';
+
 ---
 
 <html lang="en"> 
     <head>
 		<BaseHead title="Work" description="Professional experience and education." />
     </head>
-
     <body>
         <Header />
             <main class="work-page">
-                <header class="reel-title">
-                    <div class="reel-title-copy">
-                        <p class="kicker">Experience & Education</p>
-                        <h1>Work</h1>
-                    </div>
-                    <p class="logline">
-                        Software developer with a background as a professional musician and visual artist. Brings creativity, discipline, and a highly collaborative spirit to every project.
-                    </p>
-                </header>
+                <PageHeader
+				    title="Work"
+				    kicker="Selected Works"
+				    logline="Software developer with a background as a professional musician and visual artist. Brings creativity, discipline, and a highly collaborative spirit to every project."
+			    />
                 <div class="resume-page">
 
                     <!-- Bridgesphere -->

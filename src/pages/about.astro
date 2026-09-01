@@ -8,8 +8,8 @@ import dyl_drums from '../assets/dyl_drums1.jpg'
 import dyl_insnow from '../assets/self/dyl_insnow.jpg'
 import nscc_group from '../assets/nscc_group_pic.jpg'
 import { Image } from 'astro:assets';
-import '../styles/reel-title.css';
 import FloatingContact from '../components/FloatingContactBtn.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <html lang="en">
@@ -23,15 +23,11 @@ import FloatingContact from '../components/FloatingContactBtn.astro';
 	<body>
 		<Header />
 		<main class="about-page">
-			<header class="reel-title">
-				<div class="reel-title-copy">
-					<p class="kicker">Musician · Developer · Artist</p>
-					<h1>About</h1>
-				</div>
-				<p class="logline">
-					My story is one about stubbornly following your dreams, and having fun along the way.  
-				</p>
-			</header>
+			<PageHeader 
+				title="About"
+				kicker="Musician • Developer • Artist"
+				logline="My story is one about stubbornly following your dreams, and having fun along the way."
+			/>
 
 			<div class="about-content">
 				<p>
@@ -169,7 +165,8 @@ import FloatingContact from '../components/FloatingContactBtn.astro';
 <style>
 	.about-page {
 		width: 100%;
-		margin-top: -3rem;
+		max-width: auto;
+		margin: 0;
 	}
 
 	.about-content {

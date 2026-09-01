@@ -52,6 +52,13 @@ const faqItems = [
 	<body>
     <hero-section> 
       <hero-content> 
+ 
+        <hero-img-column>
+          <hero-img> 
+            <Image height={1280} width={1000} src={heroImage} alt="Portrait of Dylan James standing in a forest." />
+          </hero-img>
+        </hero-img-column>
+
         <hero-cta-column>  
           <hero-cta-section>    
 
@@ -69,13 +76,8 @@ const faqItems = [
               
             </hero-nav-section>
           </hero-cta-section>
-        </hero-cta-column>  
+        </hero-cta-column> 
 
-        <hero-img-column>
-          <hero-img> 
-            <Image height={1280} width={1000} src={heroImage} alt="Portrait of Dylan James standing in a forest." />
-          </hero-img>
-        </hero-img-column>
       </hero-content>
     <!-- <div class="hero-logo-mark" aria-hidden="true">logo</div> -->
     </hero-section>
@@ -167,30 +169,11 @@ const faqItems = [
     font-size: clamp(10rem, 16vw, 18rem);
     line-height: .87;
     letter-spacing: -.02em;
-    margin: 0; 
+    margin: 0;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-shadow: 2px 3px 0 rgba(0,0,0,.12), -1px -1px 0 rgba(255,255,255,.15);
-
-    animation: titleReveal 1s cubic-bezier(.2,.8,.2,1);
   }
 
-  @keyframes titleReveal {
-
-    from {
-      opacity:0;
-      transform:
-        translateY(0px);
-      filter:blur(7px);
-    }
-
-    to {
-      opacity:1;
-      transform:
-        translateY(0);
-      filter:blur(0);
-    }
-
-  }
 
   hero-cta-title h1:first-child {
     color:#c91d1d;
@@ -201,7 +184,7 @@ const faqItems = [
     position: sticky; 
     top: 0;          
     right: 0;
-    width: 100%;
+    width: 90%;
     height: 100vh;   
     overflow: hidden;
     display: flex;
@@ -217,7 +200,7 @@ const faqItems = [
     z-index: 2;
     transform: translateX(0);
 
-    animation: sideSwipeReveal 0.75s cubic-bezier(.77, 0, .18, 1) forwards;
+    animation: sideSwipeReveal 1s cubic-bezier(.77, 0, .18, 1) forwards;
   }
 
   @keyframes sideSwipeReveal {
@@ -227,7 +210,7 @@ const faqItems = [
     }
 
     to {
-      transform: translateX(100%);
+      transform: translateX(-100%);
     }
   }
 
@@ -367,7 +350,7 @@ const faqItems = [
       width: 100%;
       height: 50svh;
       overflow: hidden;
-      margin-top: 2rem;
+      margin-top: 0rem;
     }
 
     hero-img {
@@ -385,6 +368,52 @@ const faqItems = [
       display:block;
     }
   }
+
+  @media (max-width: 800px) {
+  hero-section,
+  hero-content {
+    min-height: auto;
+  }
+
+  hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  hero-cta-column {
+    min-height: auto;
+    padding: 1.5rem 1rem 0;
+  }
+
+  hero-cta-section {
+    margin-bottom: 0rem;
+  }
+
+  hero-label {
+    padding-left: 0;
+    margin-left: auto;
+    max-width: 70%;
+    font-size: 0.65rem;
+  }
+
+  hero-cta-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  hero-cta-title h1 {
+    font-size: clamp(4.5rem, 28vw, 8rem);
+  }
+
+  hero-nav-section {
+    margin-top: 1.5rem;
+  }
+
+  hero-img-column {
+    position: relative;
+    height: 55vh;
+    min-height: 280px;
+  }
+}
 </style>
 
 
