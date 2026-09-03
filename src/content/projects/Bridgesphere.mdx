@@ -91,7 +91,8 @@ Environments promote through Dev, QA, and Prod.
 ## Matching
 
 ### Problem: 
-Early match requests recomputed too much per call: geo candidates, scoring, and embedding similarity. All at once. 
+I had built a working version of our networking feature. In the beginning, I put most of the location filtering in-memory in the C# layer. 
+This meant that match requests recomputed too much per call: geo candidates, scoring, and embedding similarity. All at once. 
 Under realistic profile volumes, lists felt slow, and repeated dashboard loads made it worse. A full recompute on every request 
 was the wrong default.
 
@@ -106,7 +107,8 @@ was the wrong default.
 </figure>
 
 ### Constraints
-Data freshness mattered. Agents, Clients, and Brokerages may change service zones and preferences often enough that a 
+Keeping the data fresh was critical for user trust and establishing real-time data for agents to use throughout their day. 
+Agents, Clients, and Brokerages may change service zones and preferences often enough that a 
 stale list will harm trust and user experience. Caching the data without a clearly defined invalidation story was
 showing incorrect matches, based on stale data. Prior to implementing PostGIS, there was a N+1 problem in the code, where all 
 eligble matches within a large radius were called at once. Then scorers and rank/cache would run across this massive data set. 
@@ -134,20 +136,19 @@ constraint at scale: better async refresh and smarter caching are the next lever
 Move more of the heavy recompute off the request path entirely (queue or background refresh), tighten cache keys 
 around the specific fields that actually change scores, and add load testing (k6) as a release gate on match endpoints.
 
-## Hard Parts
-- Multi-role surface. One codebase for clients, agents, and brokerages. Shared primitives (auth, maps, cards, save/unsave)
+## Hard Parts (there were many)
+- Learning how to handle a multi-role surface. One codebase for clients, agents, and brokerages. I had to catch myself everytime I 
+started repeating myself for each role. The process of organizing the app into 3 unique roles and ensuring there was no crossover 
+ended up being weeks and weeks of research, trial and error, and coffee. Shared primitives (auth, maps, cards, save/unsave)
 had to stay consistent while each role's path felt complete.
 
-- Mapping was a core feature, not simply decoration. This required a great deal of reading the MapBox documentation. 
+- Mapping was a core feature, not simply decoration. The networking feature required a smart location system that could 
+filter out matches based on location. This needed to be both customizable and reliable. I spent hours reading the MapBox documentation.  
 Agents/Brokerages draw service zones; clients mark preferred areas. Geography actively drives who 
 shows up in a match list, not just where a pin sits on a map.
 
 - API iteration and maintainability during requirement evolution. I chose to use the "Strangler Fig Pattern" to slowly 
 migrate toward a cleaner v3 API surface while keeping v2 write paths alive, so production never broke mid-migration.
-
-- Production ownership. Dev → QA → Prod promotion, DNS, cookie-based auth, rate limits, CORS, and API cold-start issues. 
-Operations was critical part of the engineering job, and was never treated like an afterthought. All code was subject to
-a strict automated testing and promotion pipeline, using Bash Shell scripting.
 
 ## Tradeoffs
 | Decision | Tradeoff | Justification |
@@ -158,10 +159,11 @@ a strict automated testing and promotion pipeline, using Bash Shell scripting.
 
 ## Reflection 
 Besides having to learn on the go every day, the biggest lesson I took was that production itself is a feature. Knowing what
-not to expose in the UI, secrets management, branch promotion, DNS, and ops were just as critical as map demos and matching 
-algorithms. 
+not to expose in the UI, secrets management, branch promotion, DNS, and ops were just as critical as anything else. 
 
 I went from limited professional experience to owning and engineering a full-stack, multi-environment system end-to-end. This
-includes all the unglamorous work that separates a basic demo from a real, bonafide product. 
+includes all the unglamorous work that separates a basic demo from a real, bonafide product. I learned so much throughout the 
+process about myself, my problem-solving, what makes good project management, and much much more. I made many mistakes and the 
+app is certainly far from perfect, though the fact that the entire app _works_ is pretty impressive. 
 
 
