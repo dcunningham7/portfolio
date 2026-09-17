@@ -40,43 +40,38 @@ gallery:
 import { Image } from 'astro:assets';
 import test from '../../assets/care/home_tablet.png';
 
-## The problem
+## CARE
 
-CARE started as an NSCC capstone project where a small team would run a short 5-7 week sprint to replace a pen-and-paper
-clinical documentation workflow used by nursing students at another campus. A faculty member approached our instructor with
-an idea for a tablet-based web application that fixed the slow, and inconsistent workflow currently in use. Most current LTC
-and Acute Care facilities use software for clinical data entry, so the instructor wanted to give the students a chance to 
-become familiar with the process before joining the workforce. 
+### Overview
 
-The product needed to feel like real hospital software, and needed to include bed assignments, shift handoffs, and structured 
-assessments. All without overwhelming the students who were still learning the clinical workflow itself.
+**Clinical Assessment Record Entry (CARE)** is a clinical training application built to replace paper-based 
+documentation used by continuing care and long-term care nursing students during simulated clinical sessions.
 
+The application needed to model real clinical workflows: patient profiles, bed assignments, shift handoffs, 
+and structured assessments, while remaining practical to use on tablets. It needed to be 100% compliant, 
+and work every time.
 
-## Role
+I joined the project as a frontend developer on a six-person team and eventually took on much of the frontend 
+leadership.
 
-I was assigned to own the look and feel of the app based on prior design experience. That quickly expanded into de facto frontend leadership:
+### My Role
 
-- **Product & UI/UX design**: low-fidelity wireframes, interactive Figma prototypes, and visual direction approval by stakeholders and team.
-- **Frontend architecture**: React SPA structure, routing, auth guards, shared state, and API integration patterns the rest of the team could build on.
-- **Component development**: most of the initial page layouts and reusable UI for patient workflows.
-- **Team liaison**: met with faculty liason for feedback, requirements gathering, facility tours, and communicated with other teammates frequently.
-- **Initial CI/CD**: GitHub Actions pipelines deploying the frontend to Azure Static Web Apps across dev and production environments.
+I owned the visual direction and helped turn early prototypes into a reusable React interface. I worked closely 
+with nursing faculty to understand how the application would actually be used, then translated that feedback into 
+Figma designs, reusable components, patient profile builders, and multi-step clinical workflows.
 
-Once design was approved, the frontend team translated those flows into working React pages, ensuring the prototype and the implementation stayed aligned 
-met requirements. 
+I also worked across the frontend/backend boundary, coordinating API contracts and troubleshooting issues against 
+the live application. The project was deployed through GitHub Actions and Azure.
 
+### Designing for Real Users
 
-## Approach
+One of the biggest lessons was that a technically sound interface can still be wrong for its users. 
 
-The frontend is a React SPA organized around reusable profile sections and typed multi-step flows. The goal was to keep clinical data entry guided and scannable. 
-Additionally, the app would primarily be viewed on tablets which meant the components needed to be big, responsive, and highly readable. 
+Working with faculty exposed problems that weren't obvious from the original requirements. Tablet use, for example, 
+changed how forms, navigation, and information density needed to work. In my initial designs I made a lot of assumptions
+based on style, and was given feedback that the assessment forms would be completed on tablet almost all the time.
 
-Additional stills from the profile builder and form flows are coming once screens are scrubbed of any sensitive training data.
-
-## Hard parts
-
-Design is very tough. Creating designs that are responsive on all types of devices feels impossible. It's very typical for project requirements to evolve during
-development, but building an application for desktop and finding out it'll be used almost exclusively on tablet can make for a rough day for a beginner. 
+We iterated on the designs based on actual feedback rather than treating the original specification as fixed. 
 
 <figure class="project-figure">
   <Image
@@ -88,19 +83,27 @@ development, but building an application for desktop and finding out it'll be us
   <figcaption>Application would primarily be used on tablets provided by the college.</figcaption>
 </figure>
 
+### Working as a Team
 
-## Results
+This was my first experience contributing to a larger development team.
 
-- Awarded **2024–2025 Student of the Year** for technical contribution on CARE. 
-- Co-delivered an MVP pitch to college admin, helping secure funding and a 
-Fall 2025 production pilot in the nursing curriculum. 
+I collaborated with five other developers across frontend and backend work, worked directly with faculty stakeholders, and mentored three student developers on Git workflows and code reviews.
+
+It taught me how much good software development depends on communication between people, not just communication between systems.
+
+### Results
+
+The MVP expanded from an early prototype into an application used by 500+ nursing students and faculty.
+
+Our team also presented the MVP to stakeholders, helping secure continued funding and a production pilot.
+
+I was awarded [Student of the Year for the 2024–2025](https://www.nscc.ca/about/news/stories/2025/2024-co-op-and-wil-students-of-the-year.asp) academic year in recognition of my technical contribution to the project.
 
 
+### What I Learned
 
-## Reflection
+CARE taught me to think about frontend development as more than building components.
 
-In the year since I graduated, the app has been used by subsequent cohorts looking to get some experience working 
-within a team. The scope of the project has expanded to Acute Care and LTC classrooms across the province, and will 
-be able to help provide students with some real world experience, which in turn will help deliver higher quality 
-healthcare to people across Nova Scotia. It's an amazing feeling knowing that the team and I created something that 
-has a positive impact on people's lives. 
+The best implementation starts with understanding the person using it, communicating clearly with the people building it, and being willing to throw away an idea when the evidence says it's wrong.
+
+It was also the project that made me realize I really enjoy building software with other developers.

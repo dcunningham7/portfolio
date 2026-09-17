@@ -4,6 +4,9 @@ summary: Real estate networking platform MVP, contracted to architect whole plat
 pubDate: 2025-08-01
 role: Primary full-stack engineer
 stack:
+  - HTML
+  - CSS
+  - JavaScript
   - React
   - TypeScript
   - ASP.NET Core 8
@@ -51,119 +54,59 @@ import matching1 from '../../assets/bs/bs_matching1.png'
 import FloatingContact from '../../components/FloatingContactBtn.astro';
 
 
-## The Scenario
+## Project Overview
 
-A product owner approached me after his real-estate networking project had stalled. The previous 
-developer had left five weeks in with only some wireframes and a few technical documents completed, 
-I came on as the sole engineer on a contract basis. I spent over one year building the application 
-from the ground up: architecture, every line of production code, the roadmap, and day-to-day 
-iteration directly with the founder.
+BridgeSphere was already stalled when I joined the project. The previous developer had left about five weeks in with wireframes, technical documents, and some boilerplate.
 
-## The Role
+As a recent graduate, I came on as a contract developer and became the primary engineer. Over the next year, I took the application from an unfinished prototype to a production platform supporting 300+ real estate professionals.
 
-As a recent grad, this was the deep end: I was responsible for the whole platform.
+I worked closely with the product owner and a small technical team, owning everything from architecture and UI through backend development, infrastructure, testing, and deployment.
 
-- Architecture design and system diagramming
-- Frontend (React SPA) and backend (ASP.NET Core API)
-- Database schema, indexing, geospatial queries, and vector search
-- Matching pipeline design and optimization
-- Authentication, security, and role-based access control
-- Infrastructure, CI/CD, and production operations
-- Requirements gathering, sprint planning, and client demos
-- Direct collaboration with the founder on product direction
+## What Was Built
 
-## What I Built
+A multi-role networking platform for clients, agents, and brokerages.
 
-A monorepo: a React SPA on Azure Static Web Apps, an ASP.NET Core 8 API on App Service, PostgreSQL with 
-PostGIS and pgvector, Mapbox for maps, a FastAPI embedding sidecar, and an Azure Functions image pipeline. 
-Environments promote through Dev, QA, and Prod.
+I designed and built the application using React, TypeScript, ASP.NET Core 8, PostgreSQL, PostGIS, Mapbox, and Azure. The system includes role-based workflows, profile builders, onboarding, geospatial matching, analytics dashboards, image processing, and semantic profile matching.
 
+<figure class="project-figure"> <Image src={architecture_diagram} width={1500} height={1100} alt="Architecture diagram of the BridgeSphere system" /> <figcaption> React SPA → ASP.NET Core API → PostgreSQL/PostGIS/pgvector, supported by Azure services and a GitHub Actions Dev → QA → Prod pipeline. </figcaption> </figure>
 
-<figure class="project-figure">
-  <Image src={architecture_diagram} width={1500} height={1100} alt="Architecture diagram of the BridgeSphere system" />
-  <figcaption>
-    React SPA → App Service API → PostgreSQL/PostGIS/pgvector, with Mapbox, SendGrid, a 
-    FastAPI embedding service, and an Azure Functions image pipeline as satellite services, 
-    all shipped through a Dev → QA → Prod pipeline.
-  </figcaption>
-</figure>
+I also built the Docker and GitHub Actions CI/CD pipeline, managing separate development, QA, and production environments on Azure.
 
-## Matching
+## Performance Problems
 
-### Problem: 
-I had built a working version of our networking feature. In the beginning, I put most of the location filtering in-memory in the C# layer. 
-This meant that match requests recomputed too much per call: geo candidates, scoring, and embedding similarity. All at once. 
-Under realistic profile volumes, lists felt slow, and repeated dashboard loads made it worse. A full recompute on every request 
-was the wrong default.
+The matching system started with too much work happening in the C# application layer. Geographic filtering, scoring, and semantic matching were being performed across a large candidate set, and some requests were taking around 20 seconds.
 
-<figure class="project-figure">
-  <Image
-    src={matchPipeline}
-    width={1199}
-    height={256}
-    alt="BridgeSphere hybrid match pipeline: criteria, geo filter, scorers, semantic embeddings, then rank and cache"
-  />
-  <figcaption>Public view of the match pipeline. Weights and score breakdowns stay off the page under NDA.</figcaption>
-</figure>
+I moved geographic filtering into PostGIS, so expensive scoring only ran against relevant candidates, then added caching with explicit invalidation when profile or location data changed.
 
-### Constraints
-Keeping the data fresh was critical for user trust and establishing real-time data for agents to use throughout their day. 
-Agents, Clients, and Brokerages may change service zones and preferences often enough that a 
-stale list will harm trust and user experience. Caching the data without a clearly defined invalidation story was
-showing incorrect matches, based on stale data. Prior to implementing PostGIS, there was a N+1 problem in the code, where all 
-eligble matches within a large radius were called at once. Then scorers and rank/cache would run across this massive data set. 
-I used the haversine formula for all matches within 300km of the primary location of the user, these bugs were causing fetch
-requests to take up to 20 seconds to match with 50+ paginated agents.
+The result was a representative matching operation dropping from roughly 20 seconds to 5 seconds.
 
-### Approach
-I treated matching as a pipeline with an expensive tail, and so it was best to optimize the tail-end of the operation:
+<figure class="project-figure"> <Image src={matchPipeline} width={1199} height={256} alt="BridgeSphere hybrid matching pipeline" /> <figcaption> High-level matching pipeline. Detailed scoring logic remains private under NDA. </figcaption> </figure>
 
-- Ran geo filtering early by moving calculations from C# level to PostGIS in PostgreSQL. This caused later stages to work on
-a much smaller set of data. 
-- Ran scoring and semantic similarity only on that filtered set.
-- Cached ranked lists in memory, keyed by requester and match direction. 
-- Invalidated the cache on profile and location writes, so edits surfaced on the next meaningful read.
-- Added stricter rate limiting on match endpoints in production so retries and abuse couldn't amplify cost.
+## Additional Work 
 
-The embedding service ran as a separate FastAPI sidecar rather than inside the .NET API. That kept the main service focused, but 
-it also meant cold starts and timeouts were real failure modes I had to design around in the match path.
+This project gave me the opportunity to work across a surprisingly broad part of the software development lifecycle. Because I was responsible for moving the product forward, I developed a workflow around research → design → develop → test → iterate → deploy → maintain.
 
-### Result
-Match lists became usable for everyday dashboard traffic, and production held up under normal load. Latency is still an honest 
-constraint at scale: better async refresh and smarter caching are the next levers if the user base grows.
+That process became just as important as the technologies themselves.
 
-### What I'd do next
-Move more of the heavy recompute off the request path entirely (queue or background refresh), tighten cache keys 
-around the specific fields that actually change scores, and add load testing (k6) as a release gate on match endpoints.
+##### Along the way I:
+Built REST APIs with ASP.NET Core, dependency injection, and OpenAPI
+Implemented authentication and role-based access control
+Added automated backend testing with xUnit
+Built a small FastAPI service for semantic profile matching
+Designed geospatial workflows using PostGIS and Mapbox
+Managed Azure infrastructure, secrets, deployments, and production operations
+Worked directly with the product owner through requirements, feedback, and iteration
 
-## Hard Parts (there were many)
-- Learning how to handle a multi-role surface. One codebase for clients, agents, and brokerages. I had to catch myself everytime I 
-started repeating myself for each role. The process of organizing the app into 3 unique roles and ensuring there was no crossover 
-ended up being weeks and weeks of research, trial and error, and coffee. Shared primitives (auth, maps, cards, save/unsave)
-had to stay consistent while each role's path felt complete.
+## What I Learned
 
-- Mapping was a core feature, not simply decoration. The networking feature required a smart location system that could 
-filter out matches based on location. This needed to be both customizable and reliable. I spent hours reading the MapBox documentation.  
-Agents/Brokerages draw service zones; clients mark preferred areas. Geography actively drives who 
-shows up in a match list, not just where a pin sits on a map.
+This was my first opportunity to own a production system end-to-end, and it accelerated my learning considerably. Working across the entire 
+stack taught me to think beyond individual features. A decision in the UI could affect an API, which could affect a database query, which 
+could affect deployment or performance.
 
-- API iteration and maintainability during requirement evolution. I chose to use the "Strangler Fig Pattern" to slowly 
-migrate toward a cleaner v3 API surface while keeping v2 write paths alive, so production never broke mid-migration.
+I also learned that good engineering means making tradeoffs, communicating decisions, debugging things that worked yesterday, and knowing when an implementation needs to change.
 
-## Tradeoffs
-| Decision | Tradeoff | Justification |
-| -------- | -------- | ------------- |
-| Hybrid matching + cache | Latency vs data freshness | Full recompute on every request was expensive and slow | 
-| Dual v2/v3 APIs | Complexity vs Continuity | I determined it wasn't feasible to re-write the entire API at once. |
-| Separate embedding sidecar | Extra ops | Kept the .NET API focused and RESTful. | 
+There are plenty of things I'd build differently today. 
 
-## Reflection 
-Besides having to learn on the go every day, the biggest lesson I took was that production itself is a feature. Knowing what
-not to expose in the UI, secrets management, branch promotion, DNS, and ops were just as critical as anything else. 
+_Which is the fun part._
 
-I went from limited professional experience to owning and engineering a full-stack, multi-environment system end-to-end. This
-includes all the unglamorous work that separates a basic demo from a real, bonafide product. I learned so much throughout the 
-process about myself, my problem-solving, what makes good project management, and much much more. I made many mistakes and the 
-app is certainly far from perfect, though the fact that the entire app _works_ is pretty impressive. 
-
-
+The project gave me over a year of **real experience** turning ambiguous requirements into software, learning unfamiliar technologies when I needed them, and seeing the consequences of my engineering decisions in production.
