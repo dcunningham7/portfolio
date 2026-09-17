@@ -25,7 +25,7 @@ import PageHeader from '../components/PageHeader.astro';
                     <!-- Bridgesphere -->
                     <div class="experience-grid">
                         <div class="left-col">
-                            <div class="date-range">May 2025 – Present</div>
+                            <div class="date-range">May 2025 – Jul 2026</div>
                             <div class="location">Toronto, ON </div>
                             <div class="work-type">REMOTE</div>
                         </div>
@@ -33,26 +33,41 @@ import PageHeader from '../components/PageHeader.astro';
                             <h3>Full Stack Developer - Royal Trillium Homes</h3>
                             <p class="role-desc"><strong>Stack:</strong> C# (.NET 8) • PostgreSQL • Entity Framework Core • React • TypeScript • Python (FastAPI) • MapBox • Azure • GitHub Actions</p>
                             <ul>
-                                <li>Led end-to-end delivery from concept to deployment, meeting with products owner to translate
-                                    requirements into technical specifications, and managing the development roadmap. Maintained
-                                    production uptime consistently since launch in August 2025.
+                                <li>
+                                    Served as primary engineer for BridgeSphere, a production client platform supporting 300+ real estate professionals, owning architecture, implementation, deployment, and ongoing iteration across a small product team.
                                 </li>
                                 <li>
-                                    Built a production-ready React SPA with TypeScript serving 300+ real estate professionals, featuring
-                                    customizable component libraries, multi-layered user profiles, interactive mapping via MapBox API, and a
-                                    real-time analytics dashboard
+                                    Designed and delivered the application stack using C#, ASP.NET Core 8, React, TypeScript, PostgreSQL, and Azure, translating product requirements into technical specifications and production features.
                                 </li>
                                 <li>
-                                    Engineered a multi-tier onboarding system supporting three distinct user roles – Client, Agent, and
-                                    Brokerage – each with role-specific registration flows and permission-based matching logic. Used Form.io
-                                    for validation on the frontend, with a PostgreSQL backend powered by Entity Framework Core to manage
-                                    relational datasets
+                                    Owned the full software development lifecycle, from requirements and UI design through alpha/beta testing, feedback cycles, QA, deployment, and production support; managed delivery in Jira and delivered the contract approximately 3 weeks ahead of schedule.
                                 </li>
                                 <li>
-                                    Orchestrated cloud infrastructure and CI/CD pipeline using Azure App Service, Docker containers, and
-                                    GitHub Actions, ensuring zero-downtime deployments and maintaining 100% production uptime since
-                                    launch in August 2025.
+                                    Built a React/TypeScript SPA with reusable custom components, role-based workflows, multi-step onboarding, profile-image uploads, Mapbox geospatial interfaces, and MUI/Recharts analytics dashboards.
                                 </li>
+                                <li>
+                                    Built and maintained REST APIs with ASP.NET Core, applying dependency injection, layered architecture, and OpenAPI documentation to support maintainable backend services.
+                                </li>
+                                <li>
+                                    Implemented role-based access control (RBAC) for clients, agents, and brokerages, enforcing role-specific workflows and data access at the API layer.
+                                </li>
+
+                                <li>
+                                    Expanded automated backend coverage with xUnit, contributing to approximately 35% fewer regressions and 8 fewer hours of triage per sprint in later development cycles.
+                                </li>
+                                <li>
+                                    Developed a FastAPI microservice incorporating embeddings for semantic profile matching, integrating Python-based functionality alongside the core .NET application.
+                                </li>
+                                <li>
+                                    Optimized geospatial filtering with PostGIS, reducing a daily matching operation from approximately 20 seconds to 5 seconds.
+                                </li>
+                                <li>
+                                    Built and maintained Azure infrastructure across Static Web Apps, App Service, PostgreSQL, Functions, and queues; implemented Docker-based CI/CD with GitHub Actions across Dev, QA, and Production environments.
+                                </li>
+                                <li>
+                                    Collaborated directly with the product owner using Agile/Scrum practices, balancing technical implementation, stakeholder feedback, and roadmap priorities throughout delivery.
+                                </li>
+                            
                             </ul>
                         </div>
                     </div>
@@ -60,7 +75,7 @@ import PageHeader from '../components/PageHeader.astro';
 
                     <div class="experience-grid">
                         <div class="left-col">
-                            <div class="date-range">Jan 2025 – Jun 2025</div>
+                            <div class="date-range">Jan 2024 – May 2025</div>
                             <div class="location">HALIFAX, NS</div>
                             <div class="work-type">ON-SITE</div>
                         </div>
@@ -68,9 +83,26 @@ import PageHeader from '../components/PageHeader.astro';
                             <h3>Frontend Developer – CARE Training App </h3>
                             <p class="role-desc"><strong>Key Achievement:</strong> Student of the Year (2024/2025) - awarded for technical contribution in delivering a quality healthcare training solution.</p>
                             <ul>
-                                <li>Architected the frontend as an SPA with component-based patient profile builders and multi-step forms organized by type, keeping complex clinical data entry manageable for non-technical nursing staff.</li>
-                                <li>Primary liaison between frontend and backend sub-teams, responsible for keeping API contracts aligned with user needs and documented hand-offs so nothing got lost in translation</li>
-                                <li>Co-delivered the MVP pitch to healthcare administration, helping secure continued funding and a Fall 2026 production pilot in the nursing curriculum.</li>
+                                <li>
+                                    Worked closely with 6 developers to ship Clinical Assessment Record Entry (CARE), a responsive, tablet-first full
+                                    stack application automating and digitizing a pen-and-paper clinical assessment system.
+                                </li>
+                                <li>
+                                    Designed the look in Figma, then built it in React. Sat with faculty at the bedside so the layout matched how they actually document.
+                                </li>
+                                <li>
+                                    Shipped a React app used daily by 500+ nursing students and faculty. (Add TypeScript here only if the repo is TypeScript.)
+                                </li>
+                                <li>
+                                    Worked with the team on the .NET API and a MySQL persistence path so classroom wifi drops did not wipe in-progress work.
+                                </li>
+                                <li>
+                                    Traced live-class failures through the client and the API until the UI came back before grading stopped.
+                                </li>
+                                <li>
+                                    Mentored 3 student developers on Git and reviews so a UI change did not take down a lab.
+                                </li>
+                                
                                 
                             </ul>
                         </div>
@@ -87,9 +119,12 @@ import PageHeader from '../components/PageHeader.astro';
                             <h3>Web Developer/Designer</h3>
                             <p class="role-desc"><strong>Stack:</strong> JavaScript (React, Express) • MySQL • Prisma ORM • Figma • GitHub Projects</p>
                             <ul>
-                                <li>Deliver complete WordPress websites with custom branding, theme customization, hosting, and backend support for small business clients.</li>
-                                <li>Design logos, brand identities, and visual assets from concept to delivery, translating client vision into cohesive, professional brand packages</li>
-                                <li>Achieved 30% increase in monthly booking and 15% increase in monthly revenue for a barbershop client by integrating WooCommerce/Square into website. Allowed the client to acquire enough revenue to lease a commercial space. </li>
+                                <li>Design, develop, and maintain WordPress websites for small businesses, combining PHP, JavaScript, CSS, Figma, and Adobe workflows from brand development through production deployment.</li>
+                                <li>Manage Linux/Apache hosting, SSL configuration, backups, and site maintenance, maintaining measured service uptime of 97.8% across client infrastructure.</li>
+                                <li>Integrate Square payments and booking workflows, connecting online reservations and in-store payment processes into a unified customer experience.</li>
+                                <li>Redesigned a barbershop's e-commerce and booking experience, contributing to a 30% increase in monthly bookings and 15% increase in gross revenue within 30 days.</li>
+
+
                             </ul>
                         </div>
                     </div>
@@ -102,11 +137,11 @@ import PageHeader from '../components/PageHeader.astro';
                     <!-- Berklee --> 
                     <div class="education-grid">
                         <div class="left-col">
-                            <div class="date-range">2013 – 2016</div>
+                            <div class="date-range">2012 – 2016</div>
                             <div class="location">BOSTON, MA, USA</div>
                         </div>
                         <div class="right-col">
-                            <h3>BA - Professional Music & Songwriting</h3>
+                            <h3>BA - Professional Music</h3>
                             <p class="role-desc">Berklee College of Music</p>
                             <ul class="honours-list">
                                 <li>Dean's Honours List, Fall 2013</li>
@@ -121,12 +156,16 @@ import PageHeader from '../components/PageHeader.astro';
                             <div class="location">HALIFAX, NS</div>
                         </div>
                         <div class="right-col">
-                            <h3>Associate of Science in Information Technology – Programming</h3>
+                            <h3>Diploma, IT Programming</h3>
                             <p class="role-desc">Nova Scotia Community College</p>
                             <ul class="honours-list">
                                 <li>Honours List, Fall 2023</li>
                                 <li>Honours List, 2024</li>
-                                <li>Co-Op Student of The Year (2024-2025)</li>
+                                <li>
+                                    <a href="https://www.nscc.ca/about/news/stories/2025/2024-co-op-and-wil-students-of-the-year.asp" target="_blank" rel="noopener rereferrer">
+                                        WIL Student of The Year (2024-2025)
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -159,7 +198,7 @@ import PageHeader from '../components/PageHeader.astro';
                         <div class="cert-item">
                             <span class="cert-name">Azure Fundamentals</span>
                             <span class="cert-issuer">Microsoft</span>
-                            <span class="cert-year">2024</span>
+                            <span class="cert-year">2025</span>
                         </div>
 
                         <div class="cert-item">

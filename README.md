@@ -21,9 +21,3 @@ Built with **Astro** and designed with a focus on performance, responsive layout
 - About page highlighting my journey from musician to developer
 - Responsive, custom-designed layouts
 
-## Development
-
-Install dependencies:
-
-```bash
-npm install
